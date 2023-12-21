@@ -1,0 +1,36 @@
+def find_starting_index(food, people):
+    total_food = sum(food)
+    total_people = sum(people)
+
+    if total_food != total_people:
+        return -1
+
+    n = len(food)
+    for start_index in range(n):
+        current_food = 0
+        current_people = 0
+        success = True
+
+        for i in range(n):
+            current_food = current_food + food[(start_index + i) % n]
+            current_people = current_people + people[(start_index + i) % n]
+
+            if current_food < current_people:
+                success = False
+                break
+
+        if success:
+            return start_index
+
+    return -1 
+
+
+food1 = [1, 2, 3, 4, 5]
+people1 = [3, 4, 5, 1, 2]
+output1 = find_starting_index(food1, people1)
+print("Output 1:", output1)  
+
+food2 = [1, 2]
+people2 = [5, 6]
+output2 = find_starting_index(food2, people2)
+print("Output 2:", output2)
